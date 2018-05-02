@@ -11,6 +11,7 @@
 from __future__ import print_function
 import sys
 import os
+import time
 import ctypes
 import threading
 
@@ -29,9 +30,10 @@ if sys.version_info[0] >= 3:
 #----------------------------------------------------------------------
 class WinMM (object):
 
-	def __init__ (self):
+	def __init__ (self, prefix = ''):
 		import ctypes.wintypes
 		self.__winmm = ctypes.windll.winmm
+		self.__prefix = prefix
 		self.__mciSendString = self.__winmm.mciSendStringW
 		LPCWSTR = ctypes.wintypes.LPCWSTR
 		UINT = ctypes.wintypes.UINT
@@ -71,7 +73,7 @@ class WinMM (object):
 			return None
 		filename = os.path.abspath(filename)
 		with self.__lock:
-			name = 'media:%d'%self.__alias_index
+			name = 'media:%s%d'%(self.__prefix, self.__alias_index)
 			self.__alias_index += 1
 			if self.__alias_index > 0x7fffffff:
 				self.__alias_index = 0
@@ -168,6 +170,14 @@ class WinMM (object):
 		return True
 
 
+#----------------------------------------------------------------------
+# play sound win32
+#----------------------------------------------------------------------
+class PlaysoundWin32 (object):
+
+	def __init__ (self):
+		self._winmm = WinMM()
+
 
 #----------------------------------------------------------------------
 # testing case
@@ -176,18 +186,36 @@ if __name__ == '__main__':
 
 	def test1():
 		winmm = WinMM()
-		name = winmm.open('d:/music/sample.mp3')
+		# name = winmm.open('d:/music/sample.mp3')
+		name = winmm.open('../sounds/typewriter/keyenter.wav')
 		print(name)
-		print(winmm.play(name))
 		print(winmm.get_length(name))
 		print(winmm.get_volume(name))
 		print(winmm.set_volume(name, 1000))
+		ts = time.time()
+		print(winmm.play(name))
+		ts = time.time() - ts
+		print("ts", ts)
+		input()
+		ts = time.time()
+		print(winmm.play(name))
+		ts = time.time() - ts
+		print("ts", ts)
 		input()
 		print('is_playing', winmm.is_playing(name))
 		print('position:', winmm.get_position(name))
 		print('mode:', winmm.get_mode(name))
 		print(winmm.stop(name))
 		print('mode:', winmm.get_mode(name))
+		return 0
+
+	def test2():
+		import playsound
+		ts = time.time()
+		playsound.playsound('../sounds/typewriter/keyenter.wav', False)
+		ts = time.time() - ts
+		print("ts", ts)
+		input()
 		return 0
 
 	test1()
