@@ -81,26 +81,88 @@ function! s:pyeval(script)
 	endif
 endfunc
 
+
+"----------------------------------------------------------------------
+" local init
+"----------------------------------------------------------------------
 call s:python('import sys')
+call s:python('import os')
 call s:python('import vim')
 call s:python('sys.path.append(vim.eval("s:scripthome"))')
 
 let s:inited = 0
-let s:last_theme = ''
+let s:themes = {}
+
+
+"----------------------------------------------------------------------
+" init import
+"----------------------------------------------------------------------
+function! s:init()
+	if s:inited == 0
+		call s:python('import keysound')
+		let s:init = 1
+	endif
+endfunc
 
 
 "----------------------------------------------------------------------
 " play a sound
 "----------------------------------------------------------------------
-function! s:play(filename, ...)
+function! s:playsound(filename, ...)
 	let s:volume = (a:0 > 0)? a:1 : 1000
 	let s:filename = a:filename
-	if s:inited == 0
-		call s:python('import keysound')
-		let s:init = 1
-	endif
+	call s:init()
 	call s:python('v = int(vim.eval("s:volume")) * 0.001')
 	call s:python('keysound.playsound(vim.eval("s:filename"), v)')
+endfunc
+
+
+"----------------------------------------------------------------------
+" choose_theme 
+"----------------------------------------------------------------------
+function! s:choose_theme(theme)
+	for rtp in split(&rtp, ',')
+		let s:path = fnamemodify(rtp, ':p')
+		let s:join = 'sounds/' . a:theme
+		let s:path = s:pyeval("os.path.join(vim.eval('s:path'), vim.eval('s:join'))")
+		let s:path = s:pyeval("os.path.abspath(vim.eval('s:path'))")
+		if isdirectory(s:path)
+			return s:path
+		endif
+	endfor
+endfunc
+
+
+"----------------------------------------------------------------------
+" play a sound in given theme
+"----------------------------------------------------------------------
+function! s:play(filename, ...)
+	let theme = g:keysound_theme
+	let volume = (a:0 > 0)? a:1 : 1000
+	if has_key(s:themes, theme)
+		let path = s:themes[theme]
+	else
+		let path = s:choose_theme(theme)
+		let s:themes[theme] = path
+	endif
+	if path == ''
+		call keysound#errmsg('ERROR: can not find theme "sounds/'. theme. '" folder in runtimepaths')
+		return 
+	endif
+	let fn = path . '/' . a:filename
+	if !filereadable(fn)
+		call keysound#errmsg('ERROR: not find "'. a:filename.'" in "'.path.'"')
+		return
+	endif
+	call s:playsound(fn, volume)
+endfunc
+
+
+
+"----------------------------------------------------------------------
+" choose volume 
+"----------------------------------------------------------------------
+function! s:choose_volume(key)
 endfunc
 
 
