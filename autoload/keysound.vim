@@ -15,6 +15,10 @@ if !exists('g:keysound_py_version')
 	let g:keysound_py_version = 0
 endif
 
+if !exists('g:keysound_theme')
+	let g:keysound_theme = 'typewriter'
+endif
+
 
 "----------------------------------------------------------------------
 " tools
@@ -77,20 +81,27 @@ function! s:pyeval(script)
 	endif
 endfunc
 
-" call s:python('print(1,2,3)')
-" echo s:pyeval('3+5')
-
 call s:python('import sys')
 call s:python('import vim')
 call s:python('sys.path.append(vim.eval("s:scripthome"))')
-call s:python('import keysound')
-call s:python('import pyglet')
 
-function! s:play(filename)
+let s:inited = 0
+let s:last_theme = ''
+
+
+"----------------------------------------------------------------------
+" play a sound
+"----------------------------------------------------------------------
+function! s:play(filename, ...)
+	let s:volume = (a:0 > 0)? a:1 : 1000
 	let s:filename = a:filename
-	call s:python('keysound.play(vim.eval("s:filename"))')
+	if s:inited == 0
+		call s:python('import keysound')
+		let s:init = 1
+	endif
+	call s:python('v = int(vim.eval("s:volume")) * 0.001')
+	call s:python('keysound.playsound(vim.eval("s:filename"), v)')
 endfunc
 
 
-call s:play('d:/keyenter.wav')
 
