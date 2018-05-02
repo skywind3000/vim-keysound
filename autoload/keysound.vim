@@ -84,5 +84,13 @@ call s:python('import sys')
 call s:python('import vim')
 call s:python('sys.path.append(vim.eval("s:scripthome"))')
 call s:python('import keysound')
+call s:python('import pyglet')
 
+function! s:play(filename)
+	let s:filename = a:filename
+	call s:python('keysound.play(vim.eval("s:filename"))')
+endfunc
+
+
+call s:play('d:/keyenter.wav')
 
