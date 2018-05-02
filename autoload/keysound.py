@@ -90,6 +90,7 @@ def playsound(path, volume = 1.0):
 # choose theme
 #----------------------------------------------------------------------
 def choose_theme(theme):
+	import vim
 	for rtp in vim.eval('&rtp').split(','):
 		path = os.path.abspath(os.path.join(rtp, 'sounds/' + theme))
 		if os.path.exists(path):
