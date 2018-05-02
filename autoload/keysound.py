@@ -91,7 +91,12 @@ def playsound(path, volume = 1.0):
 #----------------------------------------------------------------------
 def choose_theme(theme):
 	for rtp in vim.eval('&rtp').split(','):
-		path = os.path.join(rtp, 'themes')
+		path = os.path.abspath(os.path.join(rtp, 'sounds/' + theme))
+		if os.path.exists(path):
+			if os.path.exists(os.path.join(path, 'keyany.wav')):
+				if path[-1:] in ('/', '\\'):
+					path = path[:-1]
+				return path
 	return ''
 
 
@@ -116,7 +121,7 @@ if __name__ == '__main__':
 		while 1:
 			for i in xrange(100):
 				time.sleep(0.10)
-				print(playsound('../themes/mario/keyany.wav'))
+				print(playsound('../sounds/mario/keyany.wav'))
 			print('stop ?')
 			text = raw_input()
 			if text == 'yes':
