@@ -1,5 +1,8 @@
-# vim-keysound
-Play typewriter sound in Vim when you are typing
+# What is it ?
+
+This plugin can play typewriter sound in Vim when you are typing a letter.
+
+
 
 # Installation
 
