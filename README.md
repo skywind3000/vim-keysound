@@ -1,6 +1,6 @@
 # What is it ?
 
-This plugin can play typewriter sound in Vim when you are typing a letter.
+This plugin can play typewriter sound in Vim when you are typing a letter. :zap:
 
 ![](doc/logo.jpg)
 
