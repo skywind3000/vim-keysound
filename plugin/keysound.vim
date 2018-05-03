@@ -30,6 +30,7 @@ function! s:keysound_init(enable)
 			au TextChangedI * call s:event_text_changed()
 			au TextChangedP * call s:event_text_changed()
 		augroup END
+		call keysound#init()
 	endif
 endfunc
 
@@ -45,13 +46,27 @@ function! s:event_text_changed()
 		call keysound#play('c')
 	elseif cur_row > s:last_row && cur_col <= s:last_col
 		call keysound#play("\n")
+	elseif cur_row < s:last_row
+		call keysound#play("c")
 	endif
 	let s:last_row = cur_row
 	let s:last_col = cur_col
 endfunc
 
 function! s:event_vim_enter()
+	if get(g:, 'keysound_enable', 0) != 0
+		call s:keysound_init(1)
+	endif
 endfunc
+
+
+"----------------------------------------------------------------------
+" VimEnter
+"----------------------------------------------------------------------
+augroup KeysoundEnterEvent
+	au!
+	au VimEnter * call s:event_vim_enter()
+augroup END
 
 
 "----------------------------------------------------------------------

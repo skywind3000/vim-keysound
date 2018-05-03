@@ -19,6 +19,10 @@ if !exists('g:keysound_theme')
 	let g:keysound_theme = 'default'
 endif
 
+if !exists('g:keysound_replace')
+	let g:keysound_replace = 1
+endif
+
 
 "----------------------------------------------------------------------
 " tools
@@ -111,10 +115,12 @@ endfunc
 "----------------------------------------------------------------------
 function! s:playsound(filename, ...)
 	let s:volume = (a:0 > 0)? a:1 : 1000
+	let s:channel = (a:0 > 1)? a:2 : -1
 	let s:filename = a:filename
 	call s:init()
 	call s:python('v = int(vim.eval("s:volume")) * 0.001')
-	call s:python('keysound.playsound(vim.eval("s:filename"), v)')
+	call s:python('c = int(vim.eval("s:channel"))')
+	call s:python('keysound.playsound(vim.eval("s:filename"), v, c)')
 endfunc
 
 
@@ -140,6 +146,7 @@ endfunc
 function! s:play(filename, ...)
 	let theme = g:keysound_theme
 	let volume = (a:0 > 0)? a:1 : 1000
+	let channel = (a:0 > 1)? a:2 : -1
 	if has_key(s:themes, theme)
 		let path = s:themes[theme]
 	else
@@ -155,7 +162,7 @@ function! s:play(filename, ...)
 		call keysound#errmsg('ERROR: not find "'. a:filename.'" in "'.path.'"')
 		return
 	endif
-	call s:playsound(fn, volume)
+	call s:playsound(fn, volume, channel)
 endfunc
 
 
@@ -168,13 +175,25 @@ function! s:random(range)
 	return s:pyeval('random.randint(0, int(vim.eval("s:range")))')
 endfunc
 
+function! keysound#init()
+	call s:init()
+	call s:python('keysound.playsound("")')
+endfunc
 
 function! keysound#play(key)
-	let volume = 230 - s:random(50)
+	let volume = 430 - s:random(50)
 	if a:key == "\n"
-		call s:play('keyenter.wav', volume)
+		if g:keysound_replace == 0
+			call s:play('keyenter.wav', volume)
+		else
+			call s:play('keyenter.wav', volume, 0)
+		endif
 	else
-		call s:play('keyany.wav', volume)
+		if g:keysound_replace == 0
+			call s:play('keyany.wav', volume)
+		else
+			call s:play('keyany.wav', volume, 1)
+		endif
 	endif
 endfunc
 
