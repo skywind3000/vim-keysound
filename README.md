@@ -51,6 +51,15 @@ let g:keysound_py_version = 3
 
 Both 2 and 3 are available. It is assigned to zero by default, and will choose python automatically, change it to 2 or 3 if you need specify the python version.
 
+# Function
+
+keysound provide a function to allow you play any wav file in vim.
+
+```VimL
+keysound#playsound(wavfile, volume)
+```
+
+`wavfile` is the path of your `.wav` file, `volume` is an integer with range of 0-1000.
 
 ## Requirements
 

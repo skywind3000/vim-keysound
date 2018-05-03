@@ -117,7 +117,7 @@ endfunc
 "----------------------------------------------------------------------
 " play a sound
 "----------------------------------------------------------------------
-function! s:playsound(filename, ...)
+function! keysound#playsound(filename, ...)
 	let s:volume = (a:0 > 0)? a:1 : 1000
 	let s:channel = (a:0 > 1)? a:2 : -1
 	let s:filename = a:filename
@@ -166,7 +166,7 @@ function! s:play(filename, ...)
 		call keysound#errmsg('ERROR: not find "'. a:filename.'" in "'.path.'"')
 		return
 	endif
-	call s:playsound(fn, volume, channel)
+	call keysound#playsound(fn, volume, channel)
 endfunc
 
 
@@ -203,5 +203,6 @@ function! keysound#play(key)
 		endif
 	endif
 endfunc
+
 
 
