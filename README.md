@@ -4,7 +4,7 @@ This plugin can play typewriter sound in Vim when you are typing a letter.
 
 ![](doc/logo.jpg)
 
-You can use it along with the [typewriter color scheme](https://github.com/logico-dev/typewriter), and feel like you are really using a typewriter.
+You can use it along with the [typewriter color scheme](https://github.com/logico-dev/typewriter), and feel like you are really typing on a typewriter.
 
 
 # Installation
@@ -28,6 +28,8 @@ Enable keysound from start:
 ```VimL
 let g:keysound_enable = 1
 ```
+
+Command `:KeysoundEnable` and `:KeysoundDisable` can be used to manually start/stop the plugin if `g:keysound_enable` is not assigned.
 
 Choose a sound theme:
 

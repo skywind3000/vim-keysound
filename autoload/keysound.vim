@@ -64,7 +64,7 @@ elseif g:keysound_py_version == 2
 		call keysound#errmsg('vim does not support +python feature')
 	endif
 elseif g:keysound_py_version == 3
-	if has('python')
+	if has('python3')
 		let s:py_cmd = 'py3'
 		let s:py_eval = 'py3eval'
 		let s:py_version = 3
@@ -95,7 +95,7 @@ call s:python('import vim')
 call s:python('import random')
 call s:python('sys.path.append(vim.eval("s:scripthome"))')
 
-let s:inited = 0
+let g:keysound#inited = 0
 let s:themes = {}
 
 
@@ -103,10 +103,14 @@ let s:themes = {}
 " init import
 "----------------------------------------------------------------------
 function! s:init()
-	if s:inited == 0
-		call s:python('import keysound')
-		let s:init = 1
+	if s:py_cmd == ''
+		return 0
 	endif
+	if g:keysound#inited == 0
+		call s:python('import keysound')
+		let g:keysound#inited = 1
+	endif
+	return 1
 endfunc
 
 
@@ -175,9 +179,12 @@ function! s:random(range)
 	return s:pyeval('random.randint(0, int(vim.eval("s:range")))')
 endfunc
 
-function! keysound#init()
-	call s:init()
+function! keysound#init() abort
+	if s:init() == 0
+		return 0
+	endif
 	call s:python('keysound.playsound("")')
+	return 1
 endfunc
 
 function! keysound#play(key)
