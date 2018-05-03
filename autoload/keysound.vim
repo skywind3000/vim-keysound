@@ -88,6 +88,7 @@ endfunc
 call s:python('import sys')
 call s:python('import os')
 call s:python('import vim')
+call s:python('import random')
 call s:python('sys.path.append(vim.eval("s:scripthome"))')
 
 let s:inited = 0
@@ -162,8 +163,19 @@ endfunc
 "----------------------------------------------------------------------
 " choose volume 
 "----------------------------------------------------------------------
-function! s:choose_volume(key)
+function! s:random(range)
+	let s:range = a:range
+	return s:pyeval('random.randint(0, int(vim.eval("s:range")))')
 endfunc
 
+
+function! keysound#play(key)
+	let volume = 1000 - s:random(500)
+	if a:key == "\n"
+		call s:play('keyenter.wav', volume)
+	else
+		call s:play('keyany.wav', volume)
+	endif
+endfunc
 
 
