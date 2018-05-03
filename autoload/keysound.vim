@@ -77,7 +77,7 @@ function! s:pyeval(script)
 	if s:py_version == 2
 		return pyeval(a:script)
 	else
-		return pyeval(a:script)
+		return py3eval(a:script)
 	endif
 endfunc
 
@@ -170,7 +170,7 @@ endfunc
 
 
 function! keysound#play(key)
-	let volume = 200 - s:random(50)
+	let volume = 230 - s:random(50)
 	if a:key == "\n"
 		call s:play('keyenter.wav', volume)
 	else
