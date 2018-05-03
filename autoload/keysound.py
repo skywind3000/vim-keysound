@@ -73,13 +73,13 @@ class AudioPlayback (object):
 #----------------------------------------------------------------------
 _playback = None
 
-def playsound(path, volume = 1.0):
+def playsound(path, volume = 1.0, channel = -1):
 	global _playback
 	if _playback is None:
 		_playback = AudioPlayback()
 	sample = _playback.load(path)
 	if sample is not None:
-		hr = _playback.play(sample)
+		hr = _playback.play(sample, channel)
 		if hr >= 0:
 			_playback.set_volume(hr, volume)
 		return hr
@@ -112,7 +112,7 @@ if __name__ == '__main__':
 		sp = ap.load("../sounds/typewriter/keyenter.wav")
 		if not sp:
 			print('bad sample')
-		print('play: ', ap.play(sp))
+		print('play: ', ap.play(sp, channel = 2))
 		raw_input()
 		print('play: ', ap.play(sp))
 		raw_input()
@@ -130,5 +130,5 @@ if __name__ == '__main__':
 		print('exit')
 		raw_input()
 
-	test2()
+	test1()
 
