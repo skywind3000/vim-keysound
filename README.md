@@ -53,7 +53,7 @@ Both 2 and 3 are available. It is assigned to zero by default, and will choose p
 ## Requirements
 
 - Python or Python3 integration in vim
-- [pysdl2](https://github.com/marcusva/py-sdl2)
+- [PySDL2](https://github.com/marcusva/py-sdl2)
 - [SDL2](https://www.libsdl.org) and [SDL2 Mixer](https://www.libsdl.org/projects/SDL_mixer/)
 
 
