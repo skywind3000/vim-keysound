@@ -41,9 +41,9 @@ endfunc
 function! s:event_text_changed()
 	let cur_row = line('.')
 	let cur_col = col('.')
-	if cur_row == s:last_row && cur_col == s:last_col + 1
+	if cur_row == s:last_row && cur_col != s:last_col
 		call keysound#play('c')
-	elseif cur_row == s:last_row + 1 && cur_col == 1
+	elseif cur_row > s:last_row && cur_col <= s:last_col
 		call keysound#play("\n")
 	endif
 	let s:last_row = cur_row

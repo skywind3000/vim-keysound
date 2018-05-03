@@ -16,7 +16,7 @@ if !exists('g:keysound_py_version')
 endif
 
 if !exists('g:keysound_theme')
-	let g:keysound_theme = 'typewriter'
+	let g:keysound_theme = 'default'
 endif
 
 
@@ -170,7 +170,7 @@ endfunc
 
 
 function! keysound#play(key)
-	let volume = 1000 - s:random(500)
+	let volume = 200 - s:random(50)
 	if a:key == "\n"
 		call s:play('keyenter.wav', volume)
 	else
