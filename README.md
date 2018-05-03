@@ -1,10 +1,10 @@
 # What is it ?
 
-This plugin can play typewriter sound in Vim when you are typing a letter. :zap:
+It's cool to play typewriter sound in Vim when you are typing a letter. :sunglasses:
 
 ![](doc/logo.jpg)
 
-You can use it along with the [typewriter color scheme](https://github.com/logico-dev/typewriter), and feel like you are really typing on a typewriter.
+:zap: You can use it along with the [typewriter color scheme](https://github.com/logico-dev/typewriter), and feel like you are really typing on a typewriter. 
 
 
 # Installation
