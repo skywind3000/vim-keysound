@@ -4,7 +4,9 @@ It's cool to play typewriter sound in Vim when you are typing a letter. :sunglas
 
 ![](doc/logo.jpg)
 
-:zap: You can use it along with the [typewriter color scheme](https://github.com/logico-dev/typewriter), and feel like you are really typing on a typewriter. 
+:zap: You can use it along with the [typewriter color scheme](https://github.com/logico-dev/typewriter), and feel like you are really working on a typewriter. 
+
+Gain the power from the the rhythm and the sound, become productive in vim.
 
 
 # Installation
