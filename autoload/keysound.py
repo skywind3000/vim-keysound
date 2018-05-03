@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+#  vim: set ts=4 sw=4 tw=0 noet :
 #======================================================================
 #
 # playsound2.py - play sound on Windows/OS X/Linux
@@ -113,9 +114,11 @@ if __name__ == '__main__':
 		if not sp:
 			print('bad sample')
 		print('play: ', ap.play(sp, channel = 2))
-		raw_input()
+		# raw_input()
+		sys.stdin.read(1)
 		print('play: ', ap.play(sp))
-		raw_input()
+		sys.stdin.read(1)
+		# raw_input()
 		return 0
 
 	def test2():
@@ -128,7 +131,7 @@ if __name__ == '__main__':
 			if text == 'yes':
 				break
 		print('exit')
-		raw_input()
+		sys.stdin.read(1)
 
 	test1()
 
