@@ -44,7 +44,15 @@ let g:keysound_theme = 'default'
 
 Then the plugin will work and you can enjoy sound effect when you are typing in insert mode.
 
-Avaliable themes are: **`default`**, **`typewriter`** and **`mario`**. Additional sound themes can be found in `sounds` directory in your `runtimepath`, that is your `~/.vim/sounds` or `/path-to-your-dotfiles/sounds`.
+Avaliable themes are: 
+
+- `default`
+- `typewriter` 
+- `mario`
+- `sword`
+- `bubble`
+
+Additional sound themes can be found in `sounds` directory in your `runtimepath`, that is your `~/.vim/sounds` or `/path-to-dotfiles/sounds`.
 
 Change python version:
 
