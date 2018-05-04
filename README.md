@@ -64,9 +64,9 @@ keysound#playsound(wavfile, volume)
 ## Requirements
 
 - Python or Python3 integration in vim
-- [PySDL2](https://github.com/marcusva/py-sdl2)
-- [SDL2](https://www.libsdl.org) and [SDL2 Mixer](https://www.libsdl.org/projects/SDL_mixer/)
+- [PySDL2](https://github.com/marcusva/py-sdl2) with SDL2 binaries.
 
+PySDL2 is used to provide low-latency audio playback.
 
 ### Ubuntu
 
