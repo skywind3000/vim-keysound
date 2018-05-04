@@ -20,7 +20,7 @@ Plug 'skywind3000/vim-keysound'
 ## vundle
 
 ```VimL
-Plugin `skywind3000/vim-keysound`
+Plugin 'skywind3000/vim-keysound'
 ```
 
 # Configuration
