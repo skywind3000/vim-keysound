@@ -8,6 +8,9 @@ It's cool to play typewriter sound in Vim when you are typing a letter. :sunglas
 
 Enjoy the rhythm of your code, gain the power from the sound, become productive in vim. :wine_glass:
 
+See [this video](https://streamable.com/yah0h) by Keefle (there is no audio delay in reality).
+
+
 
 # Installation
 
