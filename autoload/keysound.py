@@ -55,7 +55,7 @@ class AudioPlayback (object):
 	def play (self, sample, channel = -1):
 		channel = sdl2.sdlmixer.Mix_PlayChannel(channel, sample, 0)
 		if channel < 0:
-			return None
+			return -1
 		return channel
 
 	def is_playing (self, channel):
