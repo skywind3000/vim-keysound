@@ -33,13 +33,13 @@ function! s:keysound_init(enable)
 				au! 
 				au InsertEnter * call s:event_insert_enter()
 				au TextChangedI * call s:event_text_changed()
+				au TextChangedP * call s:event_text_changed()
 			augroup END
 		else
 			augroup KeysoundEvents
 				au! 
 				au InsertEnter * call s:event_insert_enter()
 				au TextChangedI * call s:event_text_changed()
-				au TextChangedP * call s:event_text_changed()
 			augroup END
 		endif
 	endif
