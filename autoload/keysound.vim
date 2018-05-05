@@ -23,6 +23,10 @@ if !exists('g:keysound_replace')
 	let g:keysound_replace = 1
 endif
 
+if !exists('g:keysound_volume')
+	let g:keysound_volume = 450
+endif
+
 
 "----------------------------------------------------------------------
 " tools
@@ -188,7 +192,7 @@ function! keysound#init() abort
 endfunc
 
 function! keysound#play(key)
-	let volume = 430 - s:random(50)
+	let volume = g:keysound_volume - s:random(g:keysound_volume / 5)
 	if a:key == "\n"
 		if g:keysound_replace == 0
 			call s:play('keyenter.wav', volume)

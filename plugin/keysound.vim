@@ -28,12 +28,20 @@ function! s:keysound_init(enable)
 			call keysound#errmsg('ERROR: keysound init failed')
 			return
 		endif
-		augroup KeysoundEvents
-			au! 
-			au InsertEnter * call s:event_insert_enter()
-			au TextChangedI * call s:event_text_changed()
-			au TextChangedP * call s:event_text_changed()
-		augroup END
+		if exists('#TextChangedP')
+			augroup KeysoundEvents
+				au! 
+				au InsertEnter * call s:event_insert_enter()
+				au TextChangedI * call s:event_text_changed()
+			augroup END
+		else
+			augroup KeysoundEvents
+				au! 
+				au InsertEnter * call s:event_insert_enter()
+				au TextChangedI * call s:event_text_changed()
+				au TextChangedP * call s:event_text_changed()
+			augroup END
+		endif
 	endif
 endfunc
 
