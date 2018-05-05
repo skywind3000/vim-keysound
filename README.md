@@ -68,7 +68,7 @@ Change volume:
 let g:keysound_volume = 500
 ```
 
-The volume is initialized to 500 by default, and should be in range of [1, 1000].
+The volume is initialized to 500 by default, and should be in range of [0, 1000].
 
 
 # Function
