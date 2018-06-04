@@ -28,7 +28,7 @@ function! s:keysound_init(enable)
 			call keysound#errmsg('ERROR: keysound init failed')
 			return
 		endif
-		if exists('#TextChangedP')
+		if exists('#TextChangedP') || exists('##TextChangedP')
 			augroup KeysoundEvents
 				au! 
 				au InsertEnter * call s:event_insert_enter()
