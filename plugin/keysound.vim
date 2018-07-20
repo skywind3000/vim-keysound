@@ -1,9 +1,10 @@
 "======================================================================
 "
-" keysound.vim - 
+" keysound.vim -
 "
 " Created by skywind on 2018/05/01
-" Last Modified: 2018/05/01 18:21:05
+" Last Modified: 2018-07-20 12:34:15
+
 "
 "======================================================================
 
@@ -30,19 +31,20 @@ function! s:keysound_init(enable)
 		endif
 		if exists('#TextChangedP') || exists('##TextChangedP')
 			augroup KeysoundEvents
-				au! 
+				au!
 				au InsertEnter * call s:event_insert_enter()
 				au TextChangedI * call s:event_text_changed()
 				au TextChangedP * call s:event_text_changed()
 			augroup END
 		else
 			augroup KeysoundEvents
-				au! 
+				au!
 				au InsertEnter * call s:event_insert_enter()
 				au TextChangedI * call s:event_text_changed()
 			augroup END
 		endif
 	endif
+	let g:keysound_enable = a:enable
 endfunc
 
 function! s:event_insert_enter()
@@ -70,6 +72,13 @@ function! s:event_vim_enter()
 	endif
 endfunc
 
+function! s:keysound_toggle()
+	if get(g:, 'keysound_enable', 0) != 0
+		call s:keysound_init(0)
+	else
+		call s:keysound_init(1)
+	endif
+endfunction
 
 "----------------------------------------------------------------------
 " VimEnter
@@ -85,4 +94,4 @@ augroup END
 "----------------------------------------------------------------------
 command! -nargs=0 KeysoundEnable call s:keysound_init(1)
 command! -nargs=0 KeysoundDisable call s:keysound_init(0)
-
+command! -nargs=0 KeysoundToggle call s:keysound_toggle()
