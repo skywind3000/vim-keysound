@@ -102,6 +102,20 @@ or
 apt-get install python3-sdl2
 ```
 
+### openSUSE
+
+Install `python-sdl2` or `python3-sdl2` and `libSDL2_mixer-2_0-0` with `zypper`, depend on your python version in vim:
+
+```bash
+zypper install python-sdl2 libSDL2_mixer-2_0-0
+```
+
+or 
+
+```bash
+zypper install python3-sdl2 libSDL2_mixer-2_0-0
+```
+
 ### Windows
 
 Install pysdl2 in python or python3:
