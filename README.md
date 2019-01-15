@@ -136,8 +136,23 @@ You can verify your SDL2 installation by `python -c "import sdl2"`. If there is 
 
 ### Mac OS X
 
-Install pysdl2 and sdl2 shared librarys by brew.
+Install pysdl2 in python or python3:
 
+```batch
+pip install pysdl2
+```
+
+or 
+
+```batch
+pip3 install pysdl2
+```
+
+Install sdl2 with brew:
+
+```batch
+brew install sdl2
+```
 
 # About
 
