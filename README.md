@@ -154,6 +154,12 @@ Install sdl2 with brew:
 brew install sdl2
 ```
 
+In alternative, it is possible to install the `pysdl2-dll`, a package that bundles the binary for `sdl2` for Windows and macOS.
+
+```bash
+pip3 install pysdl2-dll
+```
+
 # About
 
 TODO
